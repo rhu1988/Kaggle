@@ -171,83 +171,8 @@ for i in range(100000):
 print(sess.run(W))
 #sess.run([train_step,cost],feed_dict={x:train_sample,y_:survived_sample})
 w=sess.run(W)
-#print(np.dot(train[8],w))
+print(np.dot(train[8],w))
 def sigmoid(x,W):
     Wx=np.dot(x,W)
     return 1/(1+np.exp(-Wx))
 print(sigmoid(train[8],w))
-
-#test
-titanic_test=pd.read_csv('../input/test.csv')
-
-#test_embarked_list
-
-test_embarked_list=titanic_test['Embarked']
-Embarked=[]
-for i in range(len(test_embarked_list)):
-    if test_embarked_list[i]=='C':
-        Embarked.append(1)
-    elif test_embarked_list[i]=='Q':
-        Embarked.append(2)
-    elif test_embarked_list[i]=='S':
-        Embarked.append(3)
-    else:
-        Embarked.append(0)
-        
-#test_Pclass_list
-
-test_Pclass_list=titanic_test['Pclass']
-Pclass=[]
-for i in range(len(test_Pclass_list)):
-    Pclass.append(test_Pclass_list[i])
-    
-#test_Sex_list
-
-test_Sex_list=titanic_test['Sex']
-Sex=[]
-for i in range(len(test_Sex_list)):
-    if test_Sex_list[i]=='male':
-        Sex.append(1)
-    elif test_Sex_list[i]=='female':
-        Sex.append(2)
-    else:
-        Sex.append(0)
-        
-#test_Age_list
-
-test_Age_list=titanic_test['Age'].fillna(value=0)
-Age=[]
-for i in range(len(test_Age_list)):
-    Age.append(test_Age_list[i])
-    
-#test_SibSp list
-
-test_SibSp_list=titanic_test['SibSp']
-SibSp=[]
-for i in range(len(test_SibSp_list)):
-    SibSp.append(test_SibSp_list[i])
-
-#test_Parch_list
-
-test_Parch_list=titanic_test['Parch']
-Parch=[]
-for i in range(len(test_Parch_list)):
-    Parch.append(test_Parch_list[i])
-    
-#test_Fare list
-
-test_Fare_list=titanic_test['Fare']
-Fare=[]
-for i in range(len(test_Fare_list)):
-    Fare.append(test_Fare_list[i])
-    
-#test_sample
-
-test_sample=[]
-for i in range(len(test_Fare_list)):
-    test_sample.append([1,Pclass[i],Sex[i],Age[i],SibSp[i],Parch[i],Fare[i],Embarked[i]])
-#print(train_sample)
-test_sample=np.array(test_sample)
-
-test_survived=sigmoid(test_sample,w)
-print(test_survived)
